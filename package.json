@@ -1,0 +1,23 @@
+{
+  "name": "ens-subdomain-factory",
+  "author": "Radek Ostrowski https://startonchain.com",
+  "version": "1.0.0",
+  "description": "Ens and DApp example",
+  "scripts": {
+    "dev": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "truffle migrate --reset --network ropsten"
+  },
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "eth-ens-namehash-ms": "^2.2.0",
+    "truffle": "^5.5.9",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3": "^1.0.0-beta.35",
+    "@openzeppelin/contracts": "^4.1.0"
+  }
+}

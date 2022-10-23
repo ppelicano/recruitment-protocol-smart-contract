@@ -1,0 +1,597 @@
+{
+  "contractName": "ITextResolver",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "indexedKey",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "key",
+          "type": "string"
+        }
+      ],
+      "name": "TextChanged",
+      "type": "event"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "key",
+          "type": "string"
+        }
+      ],
+      "name": "text",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"node\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"string\",\"name\":\"indexedKey\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"key\",\"type\":\"string\"}],\"name\":\"TextChanged\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"node\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"key\",\"type\":\"string\"}],\"name\":\"text\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"text(bytes32,string)\":{\"params\":{\"key\":\"The text data key to query.\",\"node\":\"The ENS node to query.\"},\"return\":\"The associated text data.\"}}},\"userdoc\":{\"methods\":{\"text(bytes32,string)\":{\"notice\":\"Returns the text data associated with an ENS node and key.\"}}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/ITextResolver.sol\":\"ITextResolver\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/ITextResolver.sol\":{\"keccak256\":\"0xb62317c175034cf130732309e496850ba5c2dcebe8c8d345a257d953a099ff0d\",\"urls\":[\"bzz-raw://3888589d3fecacf49915dabf683c6c2682a641c9d6f30b2a5148182bc997c4fe\",\"dweb:/ipfs/QmSfQZi2amzDDNMuevuf64GZx91N3VQtTbLNJKZ6UghaDS\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity >0.4.24;\n\ninterface ITextResolver {\n    event TextChanged(bytes32 indexed node, string indexed indexedKey, string key);\n\n    /**\n     * Returns the text data associated with an ENS node and key.\n     * @param node The ENS node to query.\n     * @param key The text data key to query.\n     * @return The associated text data.\n     */\n    function text(bytes32 node, string calldata key) external view returns (string memory);\n}",
+  "sourcePath": "/Users/pedropelicano/repos/ens-subdomain-factory/contracts/ITextResolver.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/ITextResolver.sol",
+    "exportedSymbols": {
+      "ITextResolver": [
+        926
+      ]
+    },
+    "id": 927,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 908,
+        "literals": [
+          "solidity",
+          ">",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 926,
+        "linearizedBaseContracts": [
+          926
+        ],
+        "name": "ITextResolver",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 916,
+            "name": "TextChanged",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 915,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 910,
+                  "indexed": true,
+                  "name": "node",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 916,
+                  "src": "74:20:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 909,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "74:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 912,
+                  "indexed": true,
+                  "name": "indexedKey",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 916,
+                  "src": "96:25:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 911,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "96:6:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 914,
+                  "indexed": false,
+                  "name": "key",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 916,
+                  "src": "123:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 913,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "123:6:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "73:61:5"
+            },
+            "src": "56:79:5"
+          },
+          {
+            "body": null,
+            "documentation": "Returns the text data associated with an ENS node and key.\n@param node The ENS node to query.\n@param key The text data key to query.\n@return The associated text data.",
+            "id": 925,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "text",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 921,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 918,
+                  "name": "node",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 925,
+                  "src": "366:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 917,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "366:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 920,
+                  "name": "key",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 925,
+                  "src": "380:19:5",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 919,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "380:6:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "365:35:5"
+            },
+            "returnParameters": {
+              "id": 924,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 923,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 925,
+                  "src": "424:13:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 922,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "424:6:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "423:15:5"
+            },
+            "scope": 926,
+            "src": "352:87:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 927,
+        "src": "26:415:5"
+      }
+    ],
+    "src": "0:441:5"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/ITextResolver.sol",
+      "exportedSymbols": {
+        "ITextResolver": [
+          926
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">",
+            "0.4",
+            ".24"
+          ]
+        },
+        "id": 908,
+        "name": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            926
+          ],
+          "name": "ITextResolver",
+          "scope": 927
+        },
+        "children": [
+          {
+            "attributes": {
+              "anonymous": false,
+              "documentation": null,
+              "name": "TextChanged"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "name": "node",
+                      "scope": 916,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes32",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes32",
+                          "type": "bytes32"
+                        },
+                        "id": 909,
+                        "name": "ElementaryTypeName",
+                        "src": "74:7:5"
+                      }
+                    ],
+                    "id": 910,
+                    "name": "VariableDeclaration",
+                    "src": "74:20:5"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "name": "indexedKey",
+                      "scope": 916,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 911,
+                        "name": "ElementaryTypeName",
+                        "src": "96:6:5"
+                      }
+                    ],
+                    "id": 912,
+                    "name": "VariableDeclaration",
+                    "src": "96:25:5"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "key",
+                      "scope": 916,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 913,
+                        "name": "ElementaryTypeName",
+                        "src": "123:6:5"
+                      }
+                    ],
+                    "id": 914,
+                    "name": "VariableDeclaration",
+                    "src": "123:10:5"
+                  }
+                ],
+                "id": 915,
+                "name": "ParameterList",
+                "src": "73:61:5"
+              }
+            ],
+            "id": 916,
+            "name": "EventDefinition",
+            "src": "56:79:5"
+          },
+          {
+            "attributes": {
+              "body": null,
+              "documentation": "Returns the text data associated with an ENS node and key.\n@param node The ENS node to query.\n@param key The text data key to query.\n@return The associated text data.",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "text",
+              "scope": 926,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "node",
+                      "scope": 925,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes32",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes32",
+                          "type": "bytes32"
+                        },
+                        "id": 917,
+                        "name": "ElementaryTypeName",
+                        "src": "366:7:5"
+                      }
+                    ],
+                    "id": 918,
+                    "name": "VariableDeclaration",
+                    "src": "366:12:5"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "key",
+                      "scope": 925,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 919,
+                        "name": "ElementaryTypeName",
+                        "src": "380:6:5"
+                      }
+                    ],
+                    "id": 920,
+                    "name": "VariableDeclaration",
+                    "src": "380:19:5"
+                  }
+                ],
+                "id": 921,
+                "name": "ParameterList",
+                "src": "365:35:5"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 925,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 922,
+                        "name": "ElementaryTypeName",
+                        "src": "424:6:5"
+                      }
+                    ],
+                    "id": 923,
+                    "name": "VariableDeclaration",
+                    "src": "424:13:5"
+                  }
+                ],
+                "id": 924,
+                "name": "ParameterList",
+                "src": "423:15:5"
+              }
+            ],
+            "id": 925,
+            "name": "FunctionDefinition",
+            "src": "352:87:5"
+          }
+        ],
+        "id": 926,
+        "name": "ContractDefinition",
+        "src": "26:415:5"
+      }
+    ],
+    "id": 927,
+    "name": "SourceUnit",
+    "src": "0:441:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.7",
+  "updatedAt": "2022-06-22T21:54:15.559Z",
+  "devdoc": {
+    "methods": {
+      "text(bytes32,string)": {
+        "params": {
+          "key": "The text data key to query.",
+          "node": "The ENS node to query."
+        },
+        "return": "The associated text data."
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {
+      "text(bytes32,string)": {
+        "notice": "Returns the text data associated with an ENS node and key."
+      }
+    }
+  }
+}
