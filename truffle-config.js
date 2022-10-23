@@ -11,8 +11,9 @@ module.exports = {
     // },
     ropsten: {
       provider: () =>
-        new HDWalletProvider(secret.mnemonic, "https://ropsten.infura.io/v3/fb3ae38cae744d8aa0800ca9684a99ac"),
-      network_id: 3,
+        new HDWalletProvider(secret.mnemonic, "https://goerli.infura.io/v3/86cf6b02f7ad4c24be9d8797a2018c2a"),
+        //new HDWalletProvider(secret.mnemonic, "https://mainnet.infura.io/v3/86cf6b02f7ad4c24be9d8797a2018c2a"), => Mainnet
+      network_id: 5,
       //chainId: 3,
       //gasPrice: 19967323139,
       //gas: 8000000,
