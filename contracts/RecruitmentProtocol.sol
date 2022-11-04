@@ -5,17 +5,14 @@ import './EnsResolver.sol';
 
 // ---------------------------------------------------------------------------------------------------
 // EnsSubdomainFactory - allows creating and configuring custom ENS subdomains with one contract call.
-//
-// @author Radek Ostrowski / https://startonchain.com - MIT Licence.
-// Source: https://github.com/radek1st/ens-subdomain-factory
 // ---------------------------------------------------------------------------------------------------
 
 /**
  * @title EnsSubdomainFactory
  * @dev Allows to create and configure a subdomain for Ethereum ENS in one call.
  * After deploying this contract, change the owner of the domain you want to use
- * to this deployed contract address. For example, transfer the ownership of "startonchain.eth"
- * so anyone can create subdomains like "radek.startonchain.eth".
+ * to this deployed contract address. For example, transfer the ownership of "somedomain.eth"
+ * so anyone can create subdomains like "eth-[address].somedomain.eth".
  */
 
  contract Ownable {
@@ -32,8 +29,8 @@ import './EnsResolver.sol';
   }
 }
 
-contract EnsSubdomainFactory is Ownable{
-	address public owner;
+contract RecruitmentProtocol is Ownable{
+	address payable public owner;
 	EnsRegistry public registry;
 	EnsResolver public resolver;
 	bool public locked;
@@ -48,11 +45,20 @@ contract EnsSubdomainFactory is Ownable{
 	event TextUpdated(bytes32 subdomain);
 	event DomainTransfersLocked();
 
-	constructor(EnsRegistry _registry, EnsResolver _resolver) public {
+	constructor(EnsRegistry _registry, EnsResolver _resolver) public payable {
 		owner = msg.sender;
 		registry = _registry;
 		resolver = _resolver;
 		locked = false;
+	}
+	
+	mapping(address => uint) balances;
+	function initialDeposit() payable external {
+		// deposit sizes are restricted to 1 ether
+		require(msg.value == 1 ether);
+		// an address cannot deposit twice
+		require(balances[msg.sender] == 0);
+		balances[msg.sender] += msg.value;
 	}
 
 	/**
@@ -278,7 +284,7 @@ contract EnsSubdomainFactory is Ownable{
 	 * @dev Allows the current owner to transfer control of the contract to a new owner.
 	 * @param _owner The address to transfer ownership to.
 	 */
-	function transferContractOwnership(address _owner) public onlyOwner {
+	function transferContractOwnership(address payable _owner) public onlyOwner {
 		require(_owner != address(0), "cannot transfer to address(0)");
 		emit OwnershipTransferred(owner, _owner);
 		owner = _owner;

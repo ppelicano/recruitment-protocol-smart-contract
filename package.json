@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "truffle migrate --reset --network goerli"
+    "deploy": "truffle migrate --reset --network goerli",
+    "build": "truffle compile"
   },
   "devDependencies": {
     "lite-server": "^2.3.0"
