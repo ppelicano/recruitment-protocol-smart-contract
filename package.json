@@ -1,8 +1,8 @@
 {
   "name": "ens-subdomain-factory",
-  "author": "Radek Ostrowski https://startonchain.com",
+  "author": "Pedro Pelicano",
   "version": "1.0.0",
-  "description": "Ens and DApp example",
+  "description": "Recruitment Protocol Smart Contract",
   "scripts": {
     "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1",

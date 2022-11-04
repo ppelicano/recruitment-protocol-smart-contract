@@ -9,7 +9,7 @@ module.exports = {
     //   port: 7545,
     //   network_id: "*"
     // },
-    ropsten: {
+    goerli: {
       provider: () =>
         new HDWalletProvider(secret.mnemonic, "https://goerli.infura.io/v3/86cf6b02f7ad4c24be9d8797a2018c2a"),
         //new HDWalletProvider(secret.mnemonic, "https://mainnet.infura.io/v3/86cf6b02f7ad4c24be9d8797a2018c2a"), => Mainnet

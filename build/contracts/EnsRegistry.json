@@ -115,7 +115,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity >0.4.24;\n\n/**\n * @title EnsRegistry\n * @dev Extract of the interface for ENS Registry\n */\ncontract EnsRegistry {\n\tfunction setOwner(bytes32 node, address owner) public;\n\tfunction setSubnodeOwner(bytes32 node, bytes32 label, address owner) public;\n\tfunction setResolver(bytes32 node, address resolver) public;\n\tfunction owner(bytes32 node) public view returns (address);\n\tfunction resolver(bytes32 node) public view returns (address);\n}\n",
-  "sourcePath": "/Users/pedropelicano/repos/secrypt/secrypt-smart-contracts/contracts/EnsRegistry.sol",
+  "sourcePath": "/Users/pedropelicano/repos/recruitment-protocol/smart-contract/contracts/EnsRegistry.sol",
   "ast": {
     "absolutePath": "project:/contracts/EnsRegistry.sol",
     "exportedSymbols": {
@@ -1129,8 +1129,8 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.7",
-  "updatedAt": "2022-07-11T14:01:26.439Z",
+  "schemaVersion": "3.4.10",
+  "updatedAt": "2022-10-29T18:44:28.616Z",
   "devdoc": {
     "details": "Extract of the interface for ENS Registry",
     "methods": {},

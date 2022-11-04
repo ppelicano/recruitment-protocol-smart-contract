@@ -12,7 +12,7 @@ module.exports = async function(deployer, network, accounts) {
 		let factoryInstance = await deployer.deploy(SubdomainFactory, registryInstance.address, resolverInstance.address)
 		console.log("--------------------- factoryInstance")
         registryInstance.setOwner(
-			Namehash.hash("secrypt.eth"),
+			Namehash.hash("repro.eth"),
 			factoryInstance.address
 		);    
     });

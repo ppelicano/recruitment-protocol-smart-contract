@@ -136,7 +136,7 @@
   "sourceMap": "89:652:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;89:652:1;;;;;;;",
   "deployedSourceMap": "89:652:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;89:652:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;646:93;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;646:93:1;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;556:87;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;556:87:1;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;306:146;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;306:146:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;455:98;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;455:98:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;217:86;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;217:86:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;169:44;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;169:44:1;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;646:93;700:7;719:9;:16;729:5;719:16;;;;;;;;;;;;;;;;;;;;;712:23;;646:93;;;:::o;556:87::-;607:7;626:6;:13;633:5;626:13;;;;;;;;;;;;;;;;;;;;;619:20;;556:87;;;:::o;306:146::-;442:6;389;:50;423:5;430:6;406:31;;;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;406:31:1;;;396:42;;;;;;389:50;;;;;;;;;;;;:59;;;;;;;;;;;;;;;;;;306:146;;;:::o;455:98::-;540:9;521;:16;531:5;521:16;;;;;;;;;;;;:28;;;;;;;;;;;;;;;;;;455:98;;:::o;217:86::-;293:6;277;:13;284:5;277:13;;;;;;;;;;;;:22;;;;;;;;;;;;;;;;;;217:86;;:::o;169:44::-;;;;;;;;;;;;;;;;;;;;;;:::o",
   "source": "pragma solidity >0.4.24;\n\nimport './EnsRegistry.sol';\n\n/**\n * @title EnsRegistryMock\n */\ncontract EnsRegistryMock is EnsRegistry {\n\tmapping(bytes32 => address) owners;\n\tmapping(bytes32 => address) public resolvers;\n\n\tfunction setOwner(bytes32 _node, address _owner) public {\n\t\towners[_node] = _owner;\n\t}\n\n\tfunction setSubnodeOwner(bytes32 _node, bytes32 _label, address _owner) public {\n\t\towners[keccak256(abi.encodePacked(_node, _label))] = _owner;\n\t}\n\n\tfunction setResolver(bytes32 _node, address _resolver) public {\n\t\tresolvers[_node] = _resolver;\n\t}\n\n\tfunction owner(bytes32 _node) public view returns (address){\n\t\treturn owners[_node];\n\t}\n\n\tfunction resolver(bytes32 _node) public view returns (address){\n\t\treturn resolvers[_node];\n\t}\n}\n",
-  "sourcePath": "/Users/pedropelicano/repos/secrypt/secrypt-smart-contracts/contracts/EnsRegistryMock.sol",
+  "sourcePath": "/Users/pedropelicano/repos/recruitment-protocol/smart-contract/contracts/EnsRegistryMock.sol",
   "ast": {
     "absolutePath": "project:/contracts/EnsRegistryMock.sol",
     "exportedSymbols": {
@@ -536,7 +536,7 @@
                                 "name": "abi",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1153,
+                                "referencedDeclaration": 1258,
                                 "src": "406:3:1",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_magic_abi",
@@ -583,7 +583,7 @@
                           "name": "keccak256",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1160,
+                          "referencedDeclaration": 1265,
                           "src": "396:9:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -1706,7 +1706,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1160,
+                                      "referencedDeclaration": 1265,
                                       "type": "function (bytes memory) pure returns (bytes32)",
                                       "value": "keccak256"
                                     },
@@ -1756,7 +1756,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 1153,
+                                              "referencedDeclaration": 1258,
                                               "type": "abi",
                                               "value": "abi"
                                             },
@@ -2341,10 +2341,16 @@
       "links": {},
       "address": "0xb3c0Fa883bc855bdaEc9d8985Ae985bA455e3A9A",
       "transactionHash": "0x85d0de3f88d59b722fdd09ef52f7a69db2134ac3961a6e4767e3832fef7cf698"
+    },
+    "5": {
+      "events": {},
+      "links": {},
+      "address": "0x03e1b7FFD97E347A9F50E0d8CE59AEc538Dbc613",
+      "transactionHash": "0xe7d629960db63bb7935d4dd825fd46a0db056cba4fe51eda5aa490a16f25eb92"
     }
   },
-  "schemaVersion": "3.4.7",
-  "updatedAt": "2022-07-11T14:05:26.227Z",
+  "schemaVersion": "3.4.10",
+  "updatedAt": "2022-11-01T23:49:38.801Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {},

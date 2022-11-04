@@ -49,7 +49,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity >0.4.24;\n\n/**\n * @title EnsResolver\n * @dev Extract of the interface for ENS Resolver\n */\ncontract EnsResolver {\n\tfunction setAddr(bytes32 node, address addr) public;\n\tfunction addr(bytes32 node) public view returns (address);\n}\n",
-  "sourcePath": "/Users/pedropelicano/repos/secrypt/secrypt-smart-contracts/contracts/EnsResolver.sol",
+  "sourcePath": "/Users/pedropelicano/repos/recruitment-protocol/smart-contract/contracts/EnsResolver.sol",
   "ast": {
     "absolutePath": "project:/contracts/EnsResolver.sol",
     "exportedSymbols": {
@@ -492,8 +492,8 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.7",
-  "updatedAt": "2022-07-11T14:01:26.442Z",
+  "schemaVersion": "3.4.10",
+  "updatedAt": "2022-10-29T18:44:28.619Z",
   "devdoc": {
     "details": "Extract of the interface for ENS Resolver",
     "methods": {},

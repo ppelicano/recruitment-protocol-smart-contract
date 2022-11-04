@@ -39,7 +39,7 @@ contract EnsSubdomainFactory is Ownable{
 	bool public locked;
     bytes32 emptyNamehash = 0x00;
 	bytes32 topDomainHash = keccak256(abi.encodePacked("eth"));
-	bytes32 domainHash = keccak256(abi.encodePacked("secrypt"));
+	bytes32 domainHash = keccak256(abi.encodePacked("repro"));
 
 	event SubdomainCreated(address indexed creator, address indexed owner, bytes32 subdomain);
 	event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
