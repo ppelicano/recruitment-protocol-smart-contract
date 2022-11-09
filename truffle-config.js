@@ -1,6 +1,5 @@
 var HDWalletProvider = require("truffle-hdwallet-provider");
 const secret = require("./secret.json");
-console.log(secret.mnemonic)
 
 module.exports = {
   networks: {
@@ -20,6 +19,11 @@ module.exports = {
       skipDryRun: true,
       networkCheckTimeoutnetworkCheckTimeout: 10000,
       timeoutBlocks: 200
+    }
+  },
+  compilers: {
+    solc: {
+      version: "^0.8.0"
     }
   }
 };

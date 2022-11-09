@@ -1,10 +1,10 @@
-pragma solidity >0.4.24;
+pragma solidity ^0.8.0;
 
 import './EnsRegistry.sol';
 import './EnsResolver.sol';
 
 // ---------------------------------------------------------------------------------------------------
-// EnsSubdomainFactory - allows creating and configuring custom ENS subdomains with one contract call.
+// EnsSubdomainF actory - allows creating and configuring custom ENS subdomains with one contract call.
 // ---------------------------------------------------------------------------------------------------
 
 /**
@@ -17,20 +17,19 @@ import './EnsResolver.sol';
 
  contract Ownable {
 
-  address public owner;
+  address owner;
 
-  modifier onlyOwner {
+  modifier onlyOwner virtual {
     require(msg.sender == owner, "Ownable: You are not the owner, Bye.");
     _;
   }
 
-  constructor () public {
+  constructor () {
     owner = msg.sender;
   }
 }
 
-contract RecruitmentProtocol is Ownable{
-	address payable public owner;
+contract EnsSubdomainFactory is Ownable{
 	EnsRegistry public registry;
 	EnsResolver public resolver;
 	bool public locked;
@@ -45,27 +44,18 @@ contract RecruitmentProtocol is Ownable{
 	event TextUpdated(bytes32 subdomain);
 	event DomainTransfersLocked();
 
-	constructor(EnsRegistry _registry, EnsResolver _resolver) public payable {
-		owner = msg.sender;
+	constructor(EnsRegistry _registry, EnsResolver _resolver) {
+		owner = payable(msg.sender);
 		registry = _registry;
 		resolver = _resolver;
 		locked = false;
 	}
 	
-	mapping(address => uint) balances;
-	function initialDeposit() payable external {
-		// deposit sizes are restricted to 1 ether
-		require(msg.value == 1 ether);
-		// an address cannot deposit twice
-		require(balances[msg.sender] == 0);
-		balances[msg.sender] += msg.value;
-	}
-
 	/**
 	 * @dev Throws if called by any account other than the owner.
 	 *
 	 */
-	modifier onlyOwner() {
+	modifier onlyOwner() override {
 		require(msg.sender == owner);
 		_;
 	}
