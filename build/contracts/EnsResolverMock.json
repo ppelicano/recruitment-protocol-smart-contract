@@ -18,7 +18,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -55,7 +56,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_node\",\"type\":\"bytes32\"}],\"name\":\"addr\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_node\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_addr\",\"type\":\"address\"}],\"name\":\"setAddr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"targets\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"EnsResolverMock\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/EnsResolverMock.sol\":\"EnsResolverMock\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/EnsResolver.sol\":{\"keccak256\":\"0xb30e1176099445c7469604640e0a388d48603e1bd35255f22d82839558e5f08d\",\"urls\":[\"bzz-raw://fcc3497b1cd1f9db600d6d1db4ff731a66074d7b27bb685c91af924c09407d15\",\"dweb:/ipfs/QmU5gGYdA4mmnarRz7ryaswM8rgDCZwS1MeN3gCSxrsVx9\"]},\"project:/contracts/EnsResolverMock.sol\":{\"keccak256\":\"0x995257d85b01cfa033e12e51b4f279a4ee11cb9ab71f241111c4cb7359f44d98\",\"urls\":[\"bzz-raw://6d13751a57b8ebb9da49d6251dc8fb0b40c4e6c746ab43248f92b1964e860247\",\"dweb:/ipfs/QmPsnJRfvCSNVezFXeEBeBmgPHTNGLhnoJEn17yNAdSCkr\"]}},\"version\":1}",
@@ -1771,12 +1773,13 @@
     "5": {
       "events": {},
       "links": {},
-      "address": "0x9C2072480EEDf96803D76cD37b054402e9baB388",
-      "transactionHash": "0xabcf8cafc54d879fc582d1f0860f204b5466601b782e3d6f2def242a58217883"
+      "address": "0x38db878f9a98dA36DEDb3764E26e511b9A8150cC",
+      "transactionHash": "0x9f08b4402e8c0e258ec77bbf71fd5bbd23d5b9603ea495d49dde5b005afd332f"
     }
   },
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-11-09T21:40:53.522Z",
+  "updatedAt": "2022-11-10T08:53:03.768Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},

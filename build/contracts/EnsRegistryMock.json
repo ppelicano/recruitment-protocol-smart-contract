@@ -18,7 +18,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -96,7 +97,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -115,7 +117,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_node\",\"type\":\"bytes32\"}],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_node\",\"type\":\"bytes32\"}],\"name\":\"resolver\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"resolvers\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_node\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"setOwner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_node\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_resolver\",\"type\":\"address\"}],\"name\":\"setResolver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_node\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_label\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"setSubnodeOwner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"EnsRegistryMock\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/EnsRegistryMock.sol\":\"EnsRegistryMock\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/EnsRegistry.sol\":{\"keccak256\":\"0x84b55d5281d9e2e85e8411a9162ddf62aa17783c0a794d1a12a5f0adb6a818bd\",\"urls\":[\"bzz-raw://3a4d5bbca3e8ff4be445be7d2f360b4610d39d2184073cb06c0de7ad69c44665\",\"dweb:/ipfs/QmeBRXY9baK5ChfRoYvzB3w7wJ8JG16YmgXCwPiEvwDU6B\"]},\"project:/contracts/EnsRegistryMock.sol\":{\"keccak256\":\"0xde3a7efae561e8b3f89e35e22faba371d9b888937fac27296decdd2101422ec6\",\"urls\":[\"bzz-raw://3517ee8a7cca88b20986fe7527970e37438b18d2069c98251191002573186e5f\",\"dweb:/ipfs/QmTqsT9WFt6FGbxeL8198QBpUva9uPK2aRn2LcxwtyCHUa\"]}},\"version\":1}",
@@ -3102,12 +3105,13 @@
     "5": {
       "events": {},
       "links": {},
-      "address": "0x03e1b7FFD97E347A9F50E0d8CE59AEc538Dbc613",
-      "transactionHash": "0xe7d629960db63bb7935d4dd825fd46a0db056cba4fe51eda5aa490a16f25eb92"
+      "address": "0x608Ee312eB5281617c68a31b1bb3b147196f99D9",
+      "transactionHash": "0xe3111704115b59d1a9142be040eb5125a2baca591ae3f3f670f87a2789d2aeeb"
     }
   },
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-11-09T21:40:53.521Z",
+  "updatedAt": "2022-11-10T08:53:03.766Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
