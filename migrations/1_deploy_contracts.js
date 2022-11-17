@@ -11,9 +11,6 @@ const Namehash = require('eth-ens-namehash-ms');
 const secret = require("../secret.json");
 const fs = require('fs');
 const abis_web_project = ['EnsSubdomainFactory.json','MinterMock.json', 'Recruitment.json'];
-let filePath = secret.webProjectPath + '/src/contract-addresses.json';
-var obj = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-console.log(obj);
 
 
 module.exports = async function(deployer, network, accounts) {

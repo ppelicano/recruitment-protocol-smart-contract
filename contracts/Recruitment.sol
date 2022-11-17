@@ -22,11 +22,18 @@ contract Recruitment {
     return whitelistedTokens[token];
   }
 
-  function initialDeposit(bytes32 symbol) external payable {
-    require(msg.value == 1000,"Amount should be equal to 1 Ether");
-    accountBalances[msg.sender][symbol] += msg.value;
-    ERC20(whitelistedTokens[symbol]).transferFrom(msg.sender, address(this), msg.value);
-    emit InitialDepositCompleted(msg.sender, msg.value);
+  function initialDeposit(uint256 amount, bytes32 symbol) external {
+    require(amount == 1000,"Amount should be equal to 1000 USD");
+    accountBalances[msg.sender][symbol] += amount;
+    ERC20(whitelistedTokens[symbol]).transferFrom(msg.sender, address(this), amount);
+    emit InitialDepositCompleted(msg.sender, amount);
+  }
+
+  function initialDepositDAI(uint256 amount) external {
+    // require(amount == 1000,"Amount should be equal to 1000 DAI");
+    accountBalances[msg.sender]["0x444149"] += amount;
+    ERC20(whitelistedTokens["0x444149"]).transferFrom(msg.sender, address(this), amount);
+    // emit InitialDepositCompleted(msg.sender, amount);
   }
 
   function withdrawTokens(uint256 amount, bytes32 symbol) external {

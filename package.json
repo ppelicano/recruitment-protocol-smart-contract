@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "test:recruitment": "truffle test ./test/Recruitment.js",
     "deploy": "truffle migrate --reset --network goerli",
     "build": "truffle compile"
   },
@@ -16,6 +17,7 @@
   "lockfileVersion": 1,
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.0",
+    "chai": "^4.3.7",
     "eth-ens-namehash-ms": "^2.2.0",
     "truffle": "^5.6.5",
     "truffle-hdwallet-provider": "^1.0.17",
