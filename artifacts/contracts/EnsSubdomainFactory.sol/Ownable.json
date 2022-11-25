@@ -1,0 +1,16 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Ownable",
+  "sourceName": "contracts/EnsSubdomainFactory.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550603f80605d6000396000f3fe6080604052600080fdfea26469706673582212200d5f1cc6968984f124a39e50baa65a9e2e1d5d3de4e1e98c5e47acb818accc1464736f6c63430008110033",
+  "deployedBytecode": "0x6080604052600080fdfea26469706673582212200d5f1cc6968984f124a39e50baa65a9e2e1d5d3de4e1e98c5e47acb818accc1464736f6c63430008110033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
