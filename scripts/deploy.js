@@ -21,7 +21,7 @@ async function main() {
   console.log("Recruitment address:", recruitmentInstance.address);
 
   const DAI = ethers.utils.formatBytes32String('DAI');
-  recruitmentInstance.whitelistToken(DAI, minterMockInstance.address);
+  await recruitmentInstance.whitelistToken(DAI, minterMockInstance.address, 18);
   const daiAddress = await recruitmentInstance.getWhitelistedTokenAddresses(DAI);
   console.log(`...whitelisted DAI at contract address ${minterMockInstance.address} => ${daiAddress}`);
 

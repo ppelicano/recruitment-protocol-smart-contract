@@ -1,7 +1,7 @@
 {
   "name": "hardhat-project",
   "scripts": {
-    "deploy": "npx hardhat run scripts/deploy.js  --network goerli",
+    "deploy": "npx hardhat run scripts/deploy.js --network goerli",
     "test": "npx hardhat test test/Recruitment.js",
     "build": "npx hardhat compile --force"
   },
