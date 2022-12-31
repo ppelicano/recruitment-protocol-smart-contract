@@ -12,7 +12,7 @@ describe("Recruitment contract", function () {
 
     await rInstance.deployed();
     await tInstance.deployed();
-    await tInstance.transfer(addr1.address, `5000${"0".repeat(18)}`);
+    await tInstance.transfer(addr1.address, `1000000${"0".repeat(18)}`);
 
     await tInstance.connect(addr1).approve(
       rInstance.address,
@@ -29,10 +29,10 @@ describe("Recruitment contract", function () {
     return { rInstance, tInstance, owner, addr1, addr2, DAI };
   }
 
-  it("Address 1 balance to be initialized at 5000 DAI", async function () {
+  it("Address 1 balance to be initialized at 1,000,000 DAI", async function () {
     const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
     const addr1Balance = await tInstance.balanceOf(addr1.address);
-    expect(addr1Balance).to.equal(`5000${"0".repeat(18)}`);
+    expect(addr1Balance).to.equal(`1000000${"0".repeat(18)}`);
   });
 
   it("DAI to be whitelisted from recruitment smart contract", async function () {
@@ -51,16 +51,75 @@ describe("Recruitment contract", function () {
 
   it("Recruitment balance to be 1000 DAI", async function () {
     const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
-    console.log("owner", owner.address);
-    console.log("Owner balance before is ", await rInstance.accountBalances(addr1.address, DAI), tInstance.address);    
-    //console.log("Whitelisted token DAI address =>", await rInstance.getWhitelistedTokenAddresses(DAI));
-    await rInstance.connect(addr1).initialDeposit(
-      `1000${"0".repeat(18)}`,
+    const rcpt = await rInstance.connect(addr1).setInitialDeposit(
       DAI,
+      30,
+      20
     );
     const rBalance = await rInstance.accountBalances(addr1.address, DAI);
-    console.log("Owner balance after is ", rBalance);
-
     expect(rBalance).to.equal(`1000${"0".repeat(18)}`);
   });
+
+  it("Initial deposit monthly refunds must be 30, 20 and 50", async function() {
+    const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
+    await tInstance.connect(addr1).approve(
+        rInstance.address,
+        `2000${"0".repeat(18)}`
+      );
+    await rInstance.connect(addr1).setInitialDeposit(DAI,50,20);
+    await rInstance.connect(addr1).setInitialDeposit(DAI,30,20);
+    const percentages = await rInstance.connect(addr1.address).getAccountMonthlyRefundPcts();
+    const lastAddedDepositPcts = percentages[percentages.length - 1];
+    const month3Percentage = 100 - lastAddedDepositPcts[0] - lastAddedDepositPcts[1];
+    expect(lastAddedDepositPcts[0]).to.equal(30);
+    expect(lastAddedDepositPcts[1]).to.equal(20);
+    expect(month3Percentage).to.equal(50);
+  });
+
+  it("Total deposits amount to 25,000 USD", async function() {
+    const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
+    await tInstance.connect(addr1).approve(
+        rInstance.address,
+        `1000${"0".repeat(18)}`
+      );
+    await rInstance.connect(addr1).setInitialDeposit(DAI,50,20);
+    await tInstance.connect(addr1).approve(
+        rInstance.address,
+        `24000${"0".repeat(18)}`
+      );
+    await rInstance.connect(addr1).setFinalDeposit(DAI,`24000${"0".repeat(18)}`,0);
+    const rBalance = await rInstance.accountBalances(addr1.address, DAI);
+    expect(rBalance).to.equal(`25000${"0".repeat(18)}`);
+  });
+
+  it("Account balances equals 15,000 after withdraw of 10,000", async function() {
+    const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
+    await tInstance.connect(addr1).approve(
+        rInstance.address,
+        `1000${"0".repeat(18)}`
+      );
+    await rInstance.connect(addr1).setInitialDeposit(DAI,50,20);
+    await tInstance.connect(addr1).approve(
+        rInstance.address,
+        `24000${"0".repeat(18)}`
+      );
+    await rInstance.connect(addr1).setFinalDeposit(DAI,`24000${"0".repeat(18)}`,0);
+    await rInstance.connect(owner).withdrawTokens(DAI,`10000${"0".repeat(18)}`);
+    const rBalance = await rInstance.accountBalances(addr1.address, DAI);
+    expect(rBalance).to.equal(`15000${"0".repeat(18)}`);
+  });
+
+//   it("Final payment with wrong initial deposit index fails", async function() {
+//     const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
+//     await tInstance.connect(addr1).approve(
+//         rInstance.address,
+//         `1000${"0".repeat(18)}`
+//       );
+//     await rInstance.connect(addr1).setInitialDeposit(DAI,50,20);
+//     await tInstance.connect(addr1).approve(
+//         rInstance.address,
+//         `24000${"0".repeat(18)}`
+//       );
+//     expect(await rInstance.connect(addr1).setFinalDeposit(DAI,`24000${"0".repeat(18)}`,1)).to.revertedWith("Initial deposit index does not match!");
+//   });
 });

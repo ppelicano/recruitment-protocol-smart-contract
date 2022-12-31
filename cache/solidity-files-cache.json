@@ -185,8 +185,8 @@
       ]
     },
     "/Users/pedropelicano/repos/recruitment-protocol/smart-contract/contracts/MinterMock.sol": {
-      "lastModificationDate": 1668709434314,
-      "contentHash": "adf7a5c50d0cc14f6447ff12d3bb18a6",
+      "lastModificationDate": 1669486419952,
+      "contentHash": "a0f7313903da1665d2d8777ec59a39b9",
       "sourceName": "contracts/MinterMock.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -368,8 +368,8 @@
       ]
     },
     "/Users/pedropelicano/repos/recruitment-protocol/smart-contract/contracts/Recruitment.sol": {
-      "lastModificationDate": 1669464599066,
-      "contentHash": "439e5c41bb97555e613445737c58ed05",
+      "lastModificationDate": 1669496543893,
+      "contentHash": "3db5fa9c3a1185984fd23a3c556c9c45",
       "sourceName": "contracts/Recruitment.sol",
       "solcConfig": {
         "version": "0.8.17",

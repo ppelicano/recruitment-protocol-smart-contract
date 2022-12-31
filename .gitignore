@@ -1,3 +1,4 @@
 /node_modules
+/artifacts
 /secret.json
 package-lock.json
