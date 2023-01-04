@@ -1,7 +1,8 @@
 # Frontdoor technical design
 
-![alt text](https://raw.githubusercontent.com/ppelicano/recruitment-protocol-smart-contract/main/screenshots/infrastructure-diagram.png)
-
+<div align="center">
+    <img  src="https://raw.githubusercontent.com/ppelicano/recruitment-protocol-smart-contract/main/screenshots/infrastructure-diagram.png" />
+</div>
 ## Recruitment contract
 
 Smart contract to manage initial and final payment fees in stable coin (onchain).
