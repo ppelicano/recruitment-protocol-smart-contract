@@ -34,7 +34,7 @@ contract Recruitment {
     return accountCompleteDeposits[msg.sender];
   }
 
-  function getAccountMonthlyRefundPcts() external view returns(uint8[2][] memory) {
+  function getAccountMonthlyRefundPcts() external view returns(uint8[3][] memory) {
     return accountMonthlyRefundPcts[msg.sender];
   }
 

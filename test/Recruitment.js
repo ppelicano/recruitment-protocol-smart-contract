@@ -53,27 +53,28 @@ describe("Recruitment contract", function () {
     const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
     const rcpt = await rInstance.connect(addr1).setInitialDeposit(
       DAI,
-      30,
-      20
+      80,
+      0,
+      0
     );
     const rBalance = await rInstance.accountBalances(addr1.address, DAI);
     expect(rBalance).to.equal(`1000${"0".repeat(18)}`);
   });
 
-  it("Initial deposit monthly refunds must be 30, 20 and 50", async function() {
+  it("Initial deposit monthly refunds must be 80, 60 and 40", async function() {
     const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
     await tInstance.connect(addr1).approve(
         rInstance.address,
         `2000${"0".repeat(18)}`
       );
-    await rInstance.connect(addr1).setInitialDeposit(DAI,50,20);
-    await rInstance.connect(addr1).setInitialDeposit(DAI,30,20);
+    await rInstance.connect(addr1).setInitialDeposit(DAI,50,20,0);
+    await rInstance.connect(addr1).setInitialDeposit(DAI,80,60,40);
     const percentages = await rInstance.connect(addr1.address).getAccountMonthlyRefundPcts();
     const lastAddedDepositPcts = percentages[percentages.length - 1];
-    const month3Percentage = 100 - lastAddedDepositPcts[0] - lastAddedDepositPcts[1];
-    expect(lastAddedDepositPcts[0]).to.equal(30);
-    expect(lastAddedDepositPcts[1]).to.equal(20);
-    expect(month3Percentage).to.equal(50);
+    
+    expect(lastAddedDepositPcts[0]).to.equal(80);
+    expect(lastAddedDepositPcts[1]).to.equal(60);
+    expect(lastAddedDepositPcts[2]).to.equal(40);
   });
 
   it("Total deposits amount to 25,000 USD", async function() {
@@ -82,7 +83,7 @@ describe("Recruitment contract", function () {
         rInstance.address,
         `1000${"0".repeat(18)}`
       );
-    await rInstance.connect(addr1).setInitialDeposit(DAI,50,20);
+    await rInstance.connect(addr1).setInitialDeposit(DAI,75,60,40);
     await tInstance.connect(addr1).approve(
         rInstance.address,
         `24000${"0".repeat(18)}`
@@ -98,7 +99,7 @@ describe("Recruitment contract", function () {
         rInstance.address,
         `1000${"0".repeat(18)}`
       );
-    await rInstance.connect(addr1).setInitialDeposit(DAI,50,20);
+    await rInstance.connect(addr1).setInitialDeposit(DAI,75,50,20);
     await tInstance.connect(addr1).approve(
         rInstance.address,
         `24000${"0".repeat(18)}`

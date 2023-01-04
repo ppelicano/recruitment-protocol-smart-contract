@@ -368,8 +368,8 @@
       ]
     },
     "/Users/pedropelicano/repos/recruitment-protocol/smart-contract/contracts/Recruitment.sol": {
-      "lastModificationDate": 1669496543893,
-      "contentHash": "3db5fa9c3a1185984fd23a3c556c9c45",
+      "lastModificationDate": 1672570917430,
+      "contentHash": "9d8a7ccee63c0a6e3c60d5d84a72efaa",
       "sourceName": "contracts/Recruitment.sol",
       "solcConfig": {
         "version": "0.8.17",
