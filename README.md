@@ -15,3 +15,8 @@ Smart contract to manage IPFS user data pointers (offchain).
 ## Web app
 
 User frontend to interact with the platform
+
+
+## SKALE TESTNET SETTINGS
+
+https://docs.skale.network/develop/

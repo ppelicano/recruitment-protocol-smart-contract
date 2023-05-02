@@ -7,7 +7,7 @@ let factoryInstance,minterMockInstance,recruitmentInstance;
 
 async function main() {
   const [deployer] = await ethers.getSigners();
-
+console.log(deployer);
   console.log("Deploying contracts with the account:", deployer.address);
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
@@ -44,7 +44,9 @@ async function updateContractAddresses(factoryInstance, recruitmentInstance, min
     Recruitment: typeof recruitmentInstance === 'undefined' ? currentAddresses.Recruitment : recruitmentInstance.address,
     MinterMock: typeof minterMockInstance === 'undefined' ? currentAddresses.MinterMock : minterMockInstance.address 
   };
+
   fs.writeFileSync(secret.webProjectPath + '/src/contract-addresses.json', JSON.stringify(newAddresses));
+  fs.writeFileSync('/contract-addresses.json', JSON.stringify(newAddresses));
   console.log(`...updated contract address file at ${secret.webProjectPath}/src/contract-addresses.json`);
 }
 

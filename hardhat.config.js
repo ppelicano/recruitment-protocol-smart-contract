@@ -10,6 +10,26 @@ module.exports = {
       url: secret.alchemyHost,
       accounts: [secret.privateKey],
       //timeout: 60000
-    }
+    },
+    skale: {
+      url: secret.skale.endpoint,
+      accounts: [secret.privateKey]
+    },
+  },
+  etherscan: {
+    apiKey: {
+      skale: secret.skale.etherscanApiKey,
+    },
+    customChains: [
+      {
+        network: "skale",
+        chainId: parseInt(secret.skale.chainId),
+        urls: {
+          apiURL: secret.skale.apiUrl,
+          browserURL: secret.skale.blockExplorerUrl,
+        }
+      }
+    ]
   }
+  
 };

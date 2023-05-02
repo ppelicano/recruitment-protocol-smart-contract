@@ -1,8 +1,11 @@
 {
   "name": "hardhat-project",
   "scripts": {
-    "deploy": "npm run build&& npx hardhat run scripts/deploy.js --network goerli",
+    "deploy:goerli": "npm run build&& npx hardhat run scripts/deploy.js --network goerli",
+    "deploy:skale": "npm run build&& npx hardhat run scripts/deploy.js --network skale",
     "test": "npm run build&& npx hardhat test test/Recruitment.js",
+    "test:goerli": "npm run build&& npx hardhat test test/Recruitment.js --network goerli",
+    "test:skale": "npm run build&& npx hardhat test test/Recruitment.skale.js --network skale",
     "build": "npx hardhat compile --force"
   },
   "devDependencies": {

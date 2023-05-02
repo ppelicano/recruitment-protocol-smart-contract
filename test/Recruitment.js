@@ -4,6 +4,7 @@ const { expect } = require("chai");
 describe("Recruitment contract", function () {
   async function deployRecruitmentFixture() {
     const [owner, addr1, addr2] = await ethers.getSigners();
+    console.log(owner.address, addr1, addr2);
     const Recruitment = await ethers.getContractFactory("Recruitment");
     const MinterMock = await ethers.getContractFactory('MinterMock', addr1.address);
 
@@ -25,6 +26,7 @@ describe("Recruitment contract", function () {
       tInstance.address,
       18
     );
+    
     // Fixtures can return anything you consider useful for your tests
     return { rInstance, tInstance, owner, addr1, addr2, DAI };
   }
@@ -48,27 +50,14 @@ describe("Recruitment contract", function () {
     expect(decimals).to.equal(18);
   });
   
-
-  it("Recruitment balance to be 1000 DAI", async function () {
-    const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
-    const rcpt = await rInstance.connect(addr1).setInitialDeposit(
-      DAI,
-      80,
-      0,
-      0
-    );
-    const rBalance = await rInstance.accountBalances(addr1.address, DAI);
-    expect(rBalance).to.equal(`1000${"0".repeat(18)}`);
-  });
-
   it("Initial deposit monthly refunds must be 80, 60 and 40", async function() {
     const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
     await tInstance.connect(addr1).approve(
         rInstance.address,
         `2000${"0".repeat(18)}`
       );
-    await rInstance.connect(addr1).setInitialDeposit(DAI,50,20,0);
-    await rInstance.connect(addr1).setInitialDeposit(DAI,80,60,40);
+    await rInstance.connect(addr1).setPercentages(50,20,0);
+    await rInstance.connect(addr1).setPercentages(80,60,40);
     const percentages = await rInstance.connect(addr1.address).getAccountMonthlyRefundPcts();
     const lastAddedDepositPcts = percentages[percentages.length - 1];
     
@@ -83,12 +72,12 @@ describe("Recruitment contract", function () {
         rInstance.address,
         `1000${"0".repeat(18)}`
       );
-    await rInstance.connect(addr1).setInitialDeposit(DAI,75,60,40);
+    await rInstance.connect(addr1).setPercentages(75,60,40);
     await tInstance.connect(addr1).approve(
         rInstance.address,
-        `24000${"0".repeat(18)}`
+        `25000${"0".repeat(18)}`
       );
-    await rInstance.connect(addr1).setFinalDeposit(DAI,`24000${"0".repeat(18)}`,0);
+    await rInstance.connect(addr1).setFinalDeposit(DAI,`25000${"0".repeat(18)}`,0);
     const rBalance = await rInstance.accountBalances(addr1.address, DAI);
     expect(rBalance).to.equal(`25000${"0".repeat(18)}`);
   });
@@ -99,13 +88,13 @@ describe("Recruitment contract", function () {
         rInstance.address,
         `1000${"0".repeat(18)}`
       );
-    await rInstance.connect(addr1).setInitialDeposit(DAI,75,50,20);
+    await rInstance.connect(addr1).setPercentages(75,50,20);
     await tInstance.connect(addr1).approve(
         rInstance.address,
-        `24000${"0".repeat(18)}`
+        `25000${"0".repeat(18)}`
       );
-    await rInstance.connect(addr1).setFinalDeposit(DAI,`24000${"0".repeat(18)}`,0);
-    await rInstance.connect(owner).withdrawTokens(DAI,`10000${"0".repeat(18)}`);
+    await rInstance.connect(addr1).setFinalDeposit(DAI,`25000${"0".repeat(18)}`,0);
+    await rInstance.connect(owner).withdrawTokens(DAI,`1000${"0".repeat(18)}`);
     const rBalance = await rInstance.accountBalances(addr1.address, DAI);
     expect(rBalance).to.equal(`15000${"0".repeat(18)}`);
   });
@@ -116,7 +105,7 @@ describe("Recruitment contract", function () {
 //         rInstance.address,
 //         `1000${"0".repeat(18)}`
 //       );
-//     await rInstance.connect(addr1).setInitialDeposit(DAI,50,20);
+//     await rInstance.connect(addr1).setPercentages(DAI,50,20);
 //     await tInstance.connect(addr1).approve(
 //         rInstance.address,
 //         `24000${"0".repeat(18)}`
