@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.7;
+pragma solidity ^0.8.17;
 
 /**
  * @title Errors (Library)
@@ -8,14 +8,5 @@ pragma solidity ^0.8.7;
  */
 
 library Errors {
-    // ascendance
-    error StakingDisabled();
-    error MinimumLockLimitNotMet();
-    error MinimumStakingDurationNotMet();
-    error RingLeaderMinimumFrozenDurationNotMet();
-    error ParticipantMinimumFrozenDurationNotMet();
-    error InvalidAlphaScore();
-    error InvalidNoOfParticipants();
-    error DuplicateParticipants();
-    error RingleaderCannotBeAParticipant();
+    error 
 }

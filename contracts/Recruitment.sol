@@ -141,8 +141,8 @@ contract Recruitment {
 
   }
 
-  function getReferralIDs(address referrerWallet) external view returns(uint256[] memory){
-    return referralIndex[referrerWallet];
+  function getReferralIDs() external view returns(uint256[] memory){
+    return referralIndex[msg.sender];
   }
 
   function getReferral(uint256 refId) external view returns(FrontDoorStructs.Referral memory) {
