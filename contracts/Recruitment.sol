@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import { FrontDoorStructs } from "./DataModel.sol";
+import { Errors } from "./Errors.sol";
 
 contract Recruitment {
   event PercentagesCompleted(address indexed sender, uint8 month1RefundPct, uint8 month2RefundPct, uint8 month3RefundPct);
@@ -13,6 +16,15 @@ contract Recruitment {
   mapping(address => uint8[]) public accountCompleteDeposits;
   mapping(address => uint)public balances;
   mapping(address => string[])public referredEmails;
+  mapping(address => FrontDoorStructs.Candidate) public candidateList;
+  mapping(address => FrontDoorStructs.Referee) public refereeList;
+  mapping(address => FrontDoorStructs.Referrer) public referrerList;
+  mapping(uint256 => FrontDoorStructs.Job) public jobList;
+  mapping(address => uint256[]) public referralIndex;
+  mapping(uint256 => FrontDoorStructs.Referral) public referralList;
+  using Counters for Counters.Counter;
+  Counters.Counter private jobIdCounter;
+  Counters.Counter private referralCounter;
   uint256 initialAmountUSD = 1000;
   constructor() {
     owner = msg.sender;
@@ -73,6 +85,71 @@ contract Recruitment {
     return referredEmails[msg.sender];
   }
   
+  function registerCandidate(string memory email) external {
+    FrontDoorStructs.Candidate memory candidate = FrontDoorStructs.Candidate(msg.sender, email,0);
+    candidateList[msg.sender] = candidate;
+  }
+
+   function getCandidate(address wallet) external view returns(FrontDoorStructs.Candidate memory) {
+    return candidateList[wallet];
+  }
+
+  function registerReferrer(string memory email) external {
+    FrontDoorStructs.Referrer memory referrer = FrontDoorStructs.Referrer(msg.sender, email,0);
+    referrerList[msg.sender] = referrer;
+  }
+
+   function getReferrer(address wallet) external view returns(FrontDoorStructs.Referrer memory) {
+    return referrerList[wallet];
+  }
+
+  function registerReferee(string memory email) external {
+    FrontDoorStructs.Referee memory referee = FrontDoorStructs.Referee(msg.sender, email,0);
+    refereeList[msg.sender] = referee;
+  }
+
+  function getReferee(address wallet) external view returns(FrontDoorStructs.Referee memory) {
+    return refereeList[wallet];
+  }
+
+  function registerJob(uint256 bounty, uint256 maxSalary, uint256 minSalary, string memory companyName, string memory location, string memory role, string memory jobURL) external {
+    uint256 jobId = jobIdCounter.current();
+    FrontDoorStructs.Job memory job = FrontDoorStructs.Job(jobId, bounty, maxSalary, minSalary, companyName, location, role, jobURL);
+    jobList[jobId] = job;
+    jobIdCounter.increment();
+  }
+
+  function getJob(uint256 jobId) external view returns(FrontDoorStructs.Job memory){
+    return jobList[jobId];
+  }
+
+  function registerReferral(uint256 jobId, address refereeWallet, string memory refereeMail) external {
+    FrontDoorStructs.Referee memory referee = refereeList[refereeWallet];
+    FrontDoorStructs.Referrer memory referrer = referrerList[msg.sender];
+    FrontDoorStructs.Job memory job = jobList[jobId];
+
+    if (referee.wallet == address(0)) {
+      referee = FrontDoorStructs.Referee(refereeWallet, refereeMail, 0);
+      refereeList[refereeWallet] = referee;
+    }
+
+    FrontDoorStructs.Referral memory referral = FrontDoorStructs.Referral(referralCounter.current(), referrer, referee, job);
+
+    referralIndex[msg.sender].push(referralCounter.current());
+    referralList[referralCounter.current()] = referral;
+    referralCounter.increment();
+
+  }
+
+  function getReferralIDs(address referrerWallet) external view returns(uint256[] memory){
+    return referralIndex[referrerWallet];
+  }
+
+  function getReferral(uint256 refId) external view returns(FrontDoorStructs.Referral memory) {
+    return referralList[refId];
+  }
+
+
   // function withdrawTokens(bytes32 symbol, uint256 amount) external {
   //   // to be continued...
   //   require(msg.sender == owner, 'Only owner can withdraw!');
