@@ -42,12 +42,13 @@ input parameters:
 - jobid: string
 - referee wallet address: address
 - referee email: string
+
 notes: at least one (referee wallet address or email must be sent for the method to process). The idea is to have an onchain data relation between referrers and the referred candidates/referees.
 
 output parameters:
 - transaction hash of the sucessful transaction is enough
 
-## Referral read metho
+## Referral read method
 
 input parameters:
 - referrer wallet address
