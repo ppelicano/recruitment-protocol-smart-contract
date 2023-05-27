@@ -18,6 +18,26 @@ contract Recruitment {
     owner = msg.sender;
   }
 
+  struct ReferralScore {
+        uint256 score;  //Score given by the hiring company to the candidate 
+        address senderAddress; // Wallet address of the hiring company
+  }
+  event ReferralScoreSubmitted(address senderAddress, address referrerWallet, string referrerEmail, uint256 score);
+  mapping(address => ReferralScore[]) public referralScores;
+
+  function submitReferralScore(uint256 score,address senderAddress,address referrerWallet,string memory referrerEmail) public returns (bytes32) {
+    ReferralScore memory newReferralScore = ReferralScore(score, senderAddress);
+    referralScores[referrerWallet].push(newReferralScore);
+    emit ReferralScoreSubmitted(senderAddress, referrerWallet, referrerEmail, score);
+    return keccak256(abi.encodePacked(score, senderAddress, referrerWallet, referrerEmail));
+  }
+
+  function getReferralScores(address referrerWallet) public view returns (ReferralScore[] memory) {
+    return referralScores[referrerWallet];
+  }
+
+  
+   
   function whitelistToken(bytes32 symbol, address tokenAddress, uint8 decimals) external {
     require(msg.sender == owner, 'This function is not public');
     whitelistedTokenDecimals[symbol] = decimals;
