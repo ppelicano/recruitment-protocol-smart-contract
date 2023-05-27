@@ -38,6 +38,7 @@ library FrontDoorStructs {
 
     struct Referral{
         uint256 id;
+        bool confirmed;
         Referrer referrer;
         Referee referee;
         Job job;

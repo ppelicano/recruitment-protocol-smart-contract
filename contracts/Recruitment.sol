@@ -84,34 +84,71 @@ contract Recruitment {
   function getEmailReferrals() external view returns(string[] memory) {
     return referredEmails[msg.sender];
   }
-  
+
+  /**
+    * @notice Registers a candidate with their email
+    * @param email The email of the candidate to be registered.
+  */
   function registerCandidate(string memory email) external {
     FrontDoorStructs.Candidate memory candidate = FrontDoorStructs.Candidate(msg.sender, email,0);
     candidateList[msg.sender] = candidate;
   }
 
-   function getCandidate(address wallet) external view returns(FrontDoorStructs.Candidate memory) {
+  /**
+    * @notice Getter function of Candidate.
+    * @param wallet The wallet address of a candidate to be fetched from the mapping
+    * @return Candidate The type of FrontDoorStruct.Candidate 
+  */
+  function getCandidate(address wallet) external view returns(FrontDoorStructs.Candidate memory) {
     return candidateList[wallet];
   }
 
+  /**
+    * @notice Registers a referrer with their email
+    * @param email The email of the referrer to be registered.
+  */
   function registerReferrer(string memory email) external {
     FrontDoorStructs.Referrer memory referrer = FrontDoorStructs.Referrer(msg.sender, email,0);
     referrerList[msg.sender] = referrer;
   }
 
-   function getReferrer(address wallet) external view returns(FrontDoorStructs.Referrer memory) {
+  /**
+    * @notice Getter function of Referrer.
+    * @param wallet The wallet address of a referrer to be fetched from the mapping
+    * @return Referrer The type of FrontDoorStruct.Referrer 
+  */
+  function getReferrer(address wallet) external view returns(FrontDoorStructs.Referrer memory) {
     return referrerList[wallet];
   }
 
+  /**
+    * @notice Registers a referee with their email
+    * @param email The email of the referee to be registered.
+  */
   function registerReferee(string memory email) external {
     FrontDoorStructs.Referee memory referee = FrontDoorStructs.Referee(msg.sender, email,0);
     refereeList[msg.sender] = referee;
   }
 
+  /**
+    * @notice Getter function of Referee.
+    * @param wallet The wallet address of a referee to be fetched from the mapping
+    * @return Referee The type of FrontDoorStruct.Referee 
+  */
   function getReferee(address wallet) external view returns(FrontDoorStructs.Referee memory) {
     return refereeList[wallet];
   }
 
+  /**
+    * @notice Registers a job
+    * @param bounty The amount of bounty set by the job poster.
+    * @param maxSalary The amount of maximum salary.
+    * @param minSalary The amount of minimum salary.
+    * @param companyName The name of company.
+    * @param location The location of the company.
+    * @param role The role for the job.
+    * @param jobURL The web URL of the job description.
+  */
   function registerJob(uint256 bounty, uint256 maxSalary, uint256 minSalary, string memory companyName, string memory location, string memory role, string memory jobURL) external {
     uint256 jobId = jobIdCounter.current();
     FrontDoorStructs.Job memory job = FrontDoorStructs.Job(jobId, bounty, maxSalary, minSalary, companyName, location, role, jobURL);
@@ -119,10 +156,21 @@ contract Recruitment {
     jobIdCounter.increment();
   }
 
+  /**
+    * @notice Getter function of Job.
+    * @param jobId The ID of a job to fetch from the mapping
+    * @return Job The type of FrontDoorStruct.Job 
+  */
   function getJob(uint256 jobId) external view returns(FrontDoorStructs.Job memory){
     return jobList[jobId];
   }
 
+  /**
+    * @notice Registers a referral
+    * @param jobId The job ID already registered with the contract.
+    * @param refereeWallet The address of referee.
+    * @param refereeMail The email of the referee.
+  */
   function registerReferral(uint256 jobId, address refereeWallet, string memory refereeMail) external {
     FrontDoorStructs.Referee memory referee = refereeList[refereeWallet];
     FrontDoorStructs.Referrer memory referrer = referrerList[msg.sender];
@@ -133,7 +181,7 @@ contract Recruitment {
       refereeList[refereeWallet] = referee;
     }
 
-    FrontDoorStructs.Referral memory referral = FrontDoorStructs.Referral(referralCounter.current(), referrer, referee, job);
+    FrontDoorStructs.Referral memory referral = FrontDoorStructs.Referral(referralCounter.current(), false, referrer, referee, job);
 
     referralIndex[msg.sender].push(referralCounter.current());
     referralList[referralCounter.current()] = referral;
@@ -141,10 +189,33 @@ contract Recruitment {
 
   }
 
+  /**
+    * @notice Confirmation of a referral by the msg.sender (if the msg.sender is the referee)
+    * @param refId The referral ID already recorded in the smart contract.
+  */
+  function confirmReferral(uint256 refId) external {
+    
+    FrontDoorStructs.Referral memory referral = referralList[refId];
+
+    if (referral.referee.wallet != msg.sender) revert Errors.SenderIsNotReferee(); // The msg.sender should be the referee.
+
+    referral.confirmed = true;
+    referralList[refId] = referral;
+  }
+
+  /**
+    * @notice Getter function of Referral IDs of the msg.sender.
+    * @return uint256[] An array of uint256 with all the referral ids of msg.sender
+  */
   function getReferralIDs() external view returns(uint256[] memory){
     return referralIndex[msg.sender];
   }
 
+  /**
+    * @notice Getter function of Referral.
+    * @param refId The referral ID already recorded in the smart contract.
+    * @return Referral The type of FrontDoorStruct.Referral
+  */
   function getReferral(uint256 refId) external view returns(FrontDoorStructs.Referral memory) {
     return referralList[refId];
   }
