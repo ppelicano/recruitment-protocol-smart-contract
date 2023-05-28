@@ -219,6 +219,26 @@ contract Recruitment {
     return referralList[refId];
   }
 
+  // Issue#3
+  struct ReferralScore {
+        uint256 score;  //Score given by the hiring company to the candidate 
+        address senderAddress; // Wallet address of the hiring company
+  }
+  event ReferralScoreSubmitted(address senderAddress, address referrerWallet, uint256 score);
+  mapping(address => ReferralScore[]) public referralScores;
+
+  function submitReferralScore(uint256 score,address referrerWallet) public returns (bytes32) {
+  
+    ReferralScore memory newReferralScore = ReferralScore(score, msg.sender);
+    referralScores[referrerWallet].push(newReferralScore);
+    emit ReferralScoreSubmitted(msg.sender, referrerWallet, score);
+    return keccak256(abi.encodePacked(score, msg.sender, referrerWallet));
+  }
+
+  function getReferralScores(address referrerWallet) public view returns (ReferralScore[] memory) {
+    return referralScores[referrerWallet];
+  }
+
 
   // function withdrawTokens(bytes32 symbol, uint256 amount) external {
   //   // to be continued...
