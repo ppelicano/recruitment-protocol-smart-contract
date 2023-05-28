@@ -22,6 +22,7 @@ library FrontDoorStructs {
     struct Referee{
         address wallet;
         string email;
+        bytes32 emailHash;
         uint256 score;
     }
 

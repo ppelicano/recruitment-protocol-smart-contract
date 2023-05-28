@@ -108,7 +108,7 @@ contract Recruitment {
     * @param email The email of the referrer to be registered.
   */
   function registerReferrer(string memory email) external {
-    FrontDoorStructs.Referrer memory referrer = FrontDoorStructs.Referrer(msg.sender, email,0);
+    FrontDoorStructs.Referrer memory referrer = FrontDoorStructs.Referrer(msg.sender, email, 0);
     referrerList[msg.sender] = referrer;
   }
 
@@ -126,7 +126,7 @@ contract Recruitment {
     * @param email The email of the referee to be registered.
   */
   function registerReferee(string memory email) external {
-    FrontDoorStructs.Referee memory referee = FrontDoorStructs.Referee(msg.sender, email,0);
+    FrontDoorStructs.Referee memory referee = FrontDoorStructs.Referee(msg.sender, email,keccak256(abi.encodePacked(email)), 0);
     refereeList[msg.sender] = referee;
   }
 
@@ -168,19 +168,16 @@ contract Recruitment {
   /**
     * @notice Registers a referral
     * @param jobId The job ID already registered with the contract.
-    * @param refereeWallet The address of referee.
     * @param refereeMail The email of the referee.
   */
-  function registerReferral(uint256 jobId, address refereeWallet, string memory refereeMail) external {
-    FrontDoorStructs.Referee memory referee = refereeList[refereeWallet];
+  function registerReferral(uint256 jobId, string memory refereeMail) external {
+    FrontDoorStructs.Referee memory referee; // = refereeList[refereeWallet];
     FrontDoorStructs.Referrer memory referrer = referrerList[msg.sender];
     FrontDoorStructs.Job memory job = jobList[jobId];
 
-    if (referee.wallet == address(0)) {
-      referee = FrontDoorStructs.Referee(refereeWallet, refereeMail, 0);
-      refereeList[refereeWallet] = referee;
-    }
-
+    
+    referee.email =  refereeMail;
+    referee.emailHash = keccak256(abi.encodePacked(refereeMail));
     FrontDoorStructs.Referral memory referral = FrontDoorStructs.Referral(referralCounter.current(), false, referrer, referee, job);
 
     referralIndex[msg.sender].push(referralCounter.current());
@@ -192,13 +189,15 @@ contract Recruitment {
   /**
     * @notice Confirmation of a referral by the msg.sender (if the msg.sender is the referee)
     * @param refId The referral ID already recorded in the smart contract.
+    * @param email The email address of the referee.
   */
-  function confirmReferral(uint256 refId) external {
+  function confirmReferral(uint256 refId, string memory email) external {
     
+    bytes32 emailHash = keccak256(abi.encodePacked(email));
     FrontDoorStructs.Referral memory referral = referralList[refId];
 
-    if (referral.referee.wallet != msg.sender) revert Errors.SenderIsNotReferee(); // The msg.sender should be the referee.
-
+    //if (referral.referee.wallet != msg.sender) revert Errors.SenderIsNotReferee(); // The msg.sender should be the referee.
+    if (referral.referee.emailHash != emailHash) revert Errors.SenderIsNotReferee(); // The msg.sender should be the referee.
     referral.confirmed = true;
     referralList[refId] = referral;
   }
