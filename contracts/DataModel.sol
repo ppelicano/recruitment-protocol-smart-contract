@@ -7,6 +7,11 @@ pragma solidity ^0.8.17;
  */
 
 library FrontDoorStructs {
+    struct CompanyScore{
+        uint256 score; //score given to the company
+        address senderAddress; //address of the candidate
+    }
+
     struct Candidate {
         address wallet;
         string email;

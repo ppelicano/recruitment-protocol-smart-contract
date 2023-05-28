@@ -237,10 +237,12 @@ contract Recruitment {
 
   function getReferralScores(address referrerWallet) public view returns (ReferralScore[] memory) {
     return referralScores[referrerWallet];
+  }
+
   //Issue#4
   struct CompanyScore{
-    uint256 score; //score given to the company
-    address senderAddress; //address of the candidate
+      uint256 score; //score given to the company
+      address senderAddress; //address of the candidate
   }
 
   mapping(address => CompanyScore[]) public companyScores;
@@ -260,13 +262,4 @@ contract Recruitment {
   function getCompanyScores(address companyAddress) public view returns (CompanyScore[] memory) {
     return companyScores[companyAddress];
   }
-
-
-  // function withdrawTokens(bytes32 symbol, uint256 amount) external {
-  //   // to be continued...
-  //   require(msg.sender == owner, 'Only owner can withdraw!');
-  //   require(ERC20(whitelistedTokens[symbol]).balanceOf(msg.sender) > amount, 'Not enough balances!');
-  //   accountBalances[msg.sender][symbol] -= amount;
-  //   ERC20(whitelistedTokens[symbol]).transfer(msg.sender, amount);
-  // }
 }
