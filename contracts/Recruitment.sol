@@ -82,7 +82,7 @@ contract Recruitment {
   event CompanyScoreSubmitted(address senderAddress, address companyAddress, uint256 score);
   
   function submitCompanyScore(uint256 score,address companyAddress) public returns (bytes32) {
-    CompanyScore memory newScore = CompanyScore(score, msg.sender);
+    CompanyScore memory newScore = CompanyScore(score, msg.sender); //msg.sender is the address of the candidate
     companyScores[companyAddress].push(newScore);
     emit CompanyScoreSubmitted(msg.sender, companyAddress, score);
     return keccak256(abi.encodePacked(score, msg.sender, companyAddress));
