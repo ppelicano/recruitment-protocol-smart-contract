@@ -116,6 +116,35 @@ describe("Recruitment contract", function () {
     expect(scores[0].score).to.equal(1);
   });
 
+  it("A candidate should be able to give company scores", async function () {
+    const { rInstance, tInstance, owner, addr1, addr2, DAI } =
+      await loadFixture(deployRecruitmentFixture);
+
+    await rInstance.connect(owner).submitCompanyScore(1, addr1.address);
+    const scores = await rInstance.getCompanyScores(addr1.address);
+    expect(scores[0].score).to.equal(1);
+  });
+
+  it("Same candidate shouldn't be able to score a company more than once", async function () {
+    const { rInstance, tInstance, owner, addr1, addr2, DAI } =
+      await loadFixture(deployRecruitmentFixture);
+
+    // Submit a score for a company from addr1
+    const score1 = 4;
+    await rInstance.connect(owner).submitCompanyScore(score1, addr1.address);
+
+    // Try to submit another score for the same company from addr1
+    const score2 = 3;
+    await expect(
+      rInstance.connect(owner).submitCompanyScore(score2, addr1.address)
+    ).to.be.revertedWith("You have already scored this company");
+
+    // Get the company scores to verify there's only one score from addr1
+    const companyScores = await rInstance.getCompanyScores(addr1.address);
+    expect(companyScores.length).to.equal(1);
+    expect(companyScores[0].senderAddress).to.equal(owner.address);
+    expect(companyScores[0].score).to.equal(score1);
+  });
   //   it("Final payment with wrong initial deposit index fails", async function() {
   //     const { rInstance, tInstance, owner, addr1, addr2, DAI } = await loadFixture(deployRecruitmentFixture);
   //     await tInstance.connect(addr1).approve(

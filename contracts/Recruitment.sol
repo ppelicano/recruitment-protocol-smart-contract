@@ -237,6 +237,28 @@ contract Recruitment {
 
   function getReferralScores(address referrerWallet) public view returns (ReferralScore[] memory) {
     return referralScores[referrerWallet];
+  //Issue#4
+  struct CompanyScore{
+    uint256 score; //score given to the company
+    address senderAddress; //address of the candidate
+  }
+
+  mapping(address => CompanyScore[]) public companyScores;
+  mapping(address => mapping(address => bool)) public hasScoredCompany; //allows only to score once
+  event CompanyScoreSubmitted(address senderAddress, address companyAddress, uint256 score);
+  
+  function submitCompanyScore(uint256 score,address companyAddress) public returns (bytes32) {
+    require(!hasScoredCompany[msg.sender][companyAddress], "You have already scored this company");
+    CompanyScore[] storage scores = companyScores[companyAddress];
+    CompanyScore memory newScore = CompanyScore(score, msg.sender);
+    scores.push(newScore);
+    hasScoredCompany[msg.sender][companyAddress] = true;
+    emit CompanyScoreSubmitted(msg.sender, companyAddress, score);
+    return keccak256(abi.encodePacked(score, msg.sender, companyAddress));
+  }
+
+  function getCompanyScores(address companyAddress) public view returns (CompanyScore[] memory) {
+    return companyScores[companyAddress];
   }
 
 
