@@ -72,6 +72,25 @@ contract Recruitment {
   function getEmailReferrals() external view returns(string[] memory) {
     return referredEmails[msg.sender];
   }
+
+  struct CompanyScore{
+    uint256 score; //score given to the company
+    address senderAddress; //address of the candidate
+  }
+
+  mapping(address => CompanyScore[]) public companyScores;
+  event CompanyScoreSubmitted(address senderAddress, address companyAddress, uint256 score);
+  
+  function submitCompanyScore(uint256 score,address companyAddress) public returns (bytes32) {
+    CompanyScore memory newScore = CompanyScore(score, msg.sender);
+    companyScores[companyAddress].push(newScore);
+    emit CompanyScoreSubmitted(msg.sender, companyAddress, score);
+    return keccak256(abi.encodePacked(score, msg.sender, companyAddress));
+  }
+
+  function getCompanyScores(address companyAddress) public view returns (CompanyScore[] memory) {
+    return companyScores[companyAddress];
+  }
   
   // function withdrawTokens(bytes32 symbol, uint256 amount) external {
   //   // to be continued...
