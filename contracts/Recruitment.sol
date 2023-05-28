@@ -87,7 +87,7 @@ contract Recruitment {
   mapping(address => ReferralScore[]) public referralScores;
 
   function submitReferralScore(uint256 score,address referrerWallet) public returns (bytes32) {
-    require(msg.sender == owner, 'Only owner can submit referral score!');
+  
     ReferralScore memory newReferralScore = ReferralScore(score, msg.sender);
     referralScores[referrerWallet].push(newReferralScore);
     emit ReferralScoreSubmitted(msg.sender, referrerWallet, score);
