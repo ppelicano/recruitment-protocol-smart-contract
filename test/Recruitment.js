@@ -106,6 +106,16 @@ describe("Recruitment contract", function () {
     expect(rBalance).to.equal(`15000${"0".repeat(18)}`);
   });
 
+  // company setting scores for a candidate
+  it("Enable a company to add scores for a candidate", async function () {
+    const { rInstance, tInstance, owner, addr1, addr2, DAI } =
+      await loadFixture(deployRecruitmentFixture);
+
+    await rInstance.connect(owner).submitReferralScore(1, addr1.address);
+    const scores = await rInstance.getReferralScores(addr1.address);
+    expect(scores[0].score).to.equal(1);
+  });
+
   it("A candidate should be able to give company scores", async function () {
     const { rInstance, tInstance, owner, addr1, addr2, DAI } =
       await loadFixture(deployRecruitmentFixture);
