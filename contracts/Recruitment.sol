@@ -79,11 +79,15 @@ contract Recruitment {
   }
 
   mapping(address => CompanyScore[]) public companyScores;
+  mapping(address => mapping(address => bool)) public hasScoredCompany; //allows only to score once
   event CompanyScoreSubmitted(address senderAddress, address companyAddress, uint256 score);
   
   function submitCompanyScore(uint256 score,address companyAddress) public returns (bytes32) {
-    CompanyScore memory newScore = CompanyScore(score, msg.sender); //msg.sender is the address of the candidate
-    companyScores[companyAddress].push(newScore);
+    require(!hasScoredCompany[msg.sender][companyAddress], "You have already scored this company");
+    CompanyScore[] storage scores = companyScores[companyAddress];
+    CompanyScore memory newScore = CompanyScore(score, msg.sender);
+    scores.push(newScore);
+    hasScoredCompany[msg.sender][companyAddress] = true;
     emit CompanyScoreSubmitted(msg.sender, companyAddress, score);
     return keccak256(abi.encodePacked(score, msg.sender, companyAddress));
   }
