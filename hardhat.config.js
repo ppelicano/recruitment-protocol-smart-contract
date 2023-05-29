@@ -9,6 +9,7 @@ module.exports = {
     goerli: {
       url: secret.alchemyHost,
       accounts: [secret.privateKey],
+      allowUnlimitedContractSize: true,
       //timeout: 60000
     },
     skale: {

@@ -77,14 +77,6 @@ contract Recruitment {
     emit DepositCompleted(msg.sender, amount);
   }
 
-  function setEmailReferrals(string memory email) external {
-    referredEmails[msg.sender].push(email);
-  }
-
-  function getEmailReferrals() external view returns(string[] memory) {
-    return referredEmails[msg.sender];
-  }
-
   /**
     * @notice Registers a candidate with their email
     * @param email The email of the candidate to be registered.
@@ -142,16 +134,10 @@ contract Recruitment {
   /**
     * @notice Registers a job
     * @param bounty The amount of bounty set by the job poster.
-    * @param maxSalary The amount of maximum salary.
-    * @param minSalary The amount of minimum salary.
-    * @param companyName The name of company.
-    * @param location The location of the company.
-    * @param role The role for the job.
-    * @param jobURL The web URL of the job description.
   */
-  function registerJob(uint256 bounty, uint256 maxSalary, uint256 minSalary, string memory companyName, string memory location, string memory role, string memory jobURL) external {
+  function registerJob(uint256 bounty) external {
     uint256 jobId = jobIdCounter.current();
-    FrontDoorStructs.Job memory job = FrontDoorStructs.Job(jobId, bounty, maxSalary, minSalary, companyName, location, role, jobURL);
+    FrontDoorStructs.Job memory job = FrontDoorStructs.Job(jobId, bounty);
     jobList[jobId] = job;
     jobIdCounter.increment();
   }
@@ -219,47 +205,36 @@ contract Recruitment {
     return referralList[refId];
   }
 
-  // Issue#3
-  struct ReferralScore {
-        uint256 score;  //Score given by the hiring company to the candidate 
-        address senderAddress; // Wallet address of the hiring company
-  }
   event ReferralScoreSubmitted(address senderAddress, address referrerWallet, uint256 score);
-  mapping(address => ReferralScore[]) public referralScores;
+  mapping(address => FrontDoorStructs.ReferralScore[]) public referralScores;
 
   function submitReferralScore(uint256 score,address referrerWallet) public returns (bytes32) {
   
-    ReferralScore memory newReferralScore = ReferralScore(score, msg.sender);
+    FrontDoorStructs.ReferralScore memory newReferralScore = FrontDoorStructs.ReferralScore(score, msg.sender);
     referralScores[referrerWallet].push(newReferralScore);
     emit ReferralScoreSubmitted(msg.sender, referrerWallet, score);
     return keccak256(abi.encodePacked(score, msg.sender, referrerWallet));
   }
 
-  function getReferralScores(address referrerWallet) public view returns (ReferralScore[] memory) {
+  function getReferralScores(address referrerWallet) public view returns (FrontDoorStructs.ReferralScore[] memory) {
     return referralScores[referrerWallet];
   }
 
-  //Issue#4
-  struct CompanyScore{
-      uint256 score; //score given to the company
-      address senderAddress; //address of the candidate
-  }
-
-  mapping(address => CompanyScore[]) public companyScores;
+  mapping(address => FrontDoorStructs.CompanyScore[]) public companyScores;
   mapping(address => mapping(address => bool)) public hasScoredCompany; //allows only to score once
   event CompanyScoreSubmitted(address senderAddress, address companyAddress, uint256 score);
   
   function submitCompanyScore(uint256 score,address companyAddress) public returns (bytes32) {
     require(!hasScoredCompany[msg.sender][companyAddress], "You have already scored this company");
-    CompanyScore[] storage scores = companyScores[companyAddress];
-    CompanyScore memory newScore = CompanyScore(score, msg.sender);
+    FrontDoorStructs.CompanyScore[] storage scores = companyScores[companyAddress];
+    FrontDoorStructs.CompanyScore memory newScore = FrontDoorStructs.CompanyScore(score, msg.sender);
     scores.push(newScore);
     hasScoredCompany[msg.sender][companyAddress] = true;
     emit CompanyScoreSubmitted(msg.sender, companyAddress, score);
     return keccak256(abi.encodePacked(score, msg.sender, companyAddress));
   }
 
-  function getCompanyScores(address companyAddress) public view returns (CompanyScore[] memory) {
+  function getCompanyScores(address companyAddress) public view returns (FrontDoorStructs.CompanyScore[] memory) {
     return companyScores[companyAddress];
   }
 }

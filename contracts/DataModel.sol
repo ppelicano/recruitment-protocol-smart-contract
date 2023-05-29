@@ -7,10 +7,6 @@ pragma solidity ^0.8.17;
  */
 
 library FrontDoorStructs {
-    struct CompanyScore{
-        uint256 score; //score given to the company
-        address senderAddress; //address of the candidate
-    }
 
     struct Candidate {
         address wallet;
@@ -34,12 +30,6 @@ library FrontDoorStructs {
     struct Job {
         uint256 id;
         uint256 bounty;
-        uint256 maxSalary;
-        uint256 minSalary;
-        string companyName;
-        string location;
-        string role;
-        string webURL;
     }
 
     struct Referral{
@@ -49,4 +39,14 @@ library FrontDoorStructs {
         Referee referee;
         Job job;
     }
+
+    struct CompanyScore{
+      uint256 score; //score given to the company
+      address senderAddress; //address of the candidate
+    }
+
+    struct ReferralScore {
+        uint256 score;  //Score given by the hiring company to the candidate 
+        address senderAddress; // Wallet address of the hiring company
+  }
 }

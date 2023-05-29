@@ -368,8 +368,8 @@
       ]
     },
     "/Users/pedropelicano/repos/front-door.xyz/smart-contract/contracts/Recruitment.sol": {
-      "lastModificationDate": 1685273087636,
-      "contentHash": "c489bbaa618720ad91681f2177edeec3",
+      "lastModificationDate": 1685287274940,
+      "contentHash": "3ba4cf619561ca13a59a348a96cb39b3",
       "sourceName": "contracts/Recruitment.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -408,8 +408,8 @@
       ]
     },
     "/Users/pedropelicano/repos/front-door.xyz/smart-contract/contracts/DataModel.sol": {
-      "lastModificationDate": 1685272273641,
-      "contentHash": "c4caa6aff44320aef6ac7efe7097d46f",
+      "lastModificationDate": 1685287221178,
+      "contentHash": "280192cd2e5733f449a0a655fefa408b",
       "sourceName": "contracts/DataModel.sol",
       "solcConfig": {
         "version": "0.8.17",
